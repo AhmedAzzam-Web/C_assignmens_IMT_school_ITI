@@ -13,6 +13,7 @@
 #include <stdio.h>
 
 void SortedArray(int *arr, int size);
+void RemoveDuplicates(int *arr, int size);
 void main(void)
 {
     int arr[9] = {3, 4, 5, 1, 1, 2, 2, 5, 5};
@@ -20,7 +21,8 @@ void main(void)
 
     SortedArray(arr, size);
 
-    // print sorted array
+    RemoveDuplicates(arr, size);
+
     for (int i = 0; i < size; i++)
     {
         printf("element %d: %d\n", i, arr[i]);
@@ -41,5 +43,25 @@ void SortedArray(int *arr, int size)
                 arr[j + 1] = temp;
             }
         }
+    }
+}
+
+void RemoveDuplicates(int *arr, int size)
+{
+    // last unique element (j is just a tracker while i is traversing the list)
+    int j = 0;
+    for (int i = 1; i < size; i++)
+    {
+        if (arr[i] != arr[j])
+        {
+            j++;
+            arr[j] = arr[i];
+        }
+    }
+
+    // Filling the remaining elements with zero
+    for (int i = j + 1; i < size; i++)
+    {
+        arr[i] = 0;
     }
 }
